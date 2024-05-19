@@ -1,13 +1,20 @@
 package org.example;
-
-import org.example.repository.PersonRepository;
 import org.example.service.Impl.PersonServiceImpl;
+import org.example.service.PersonService;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String consoleName = "service";
-      PersonRepository personRepository = new PersonRepository();
-      personRepository.findByName(consoleName);
+        Scanner scanner= new Scanner(System.in);
+        String f =  scanner.next();
+        PersonService personService = new PersonServiceImpl();
+
+        personService.findByName(f);
+        personService.getServiceContact(f);
+        personService.logServiceContact(f);
+        personService.getByName(f);
+
 
     }
 }
