@@ -6,15 +6,27 @@ import java.util.*;
 
 public class PersonRepository {
     Person persons = new Person();
+    private Map<Long, Person> bd() {
+        Map<Long, Person> map = new HashMap<>();
+        map.put(1l, new Person("666", "service"));
+        map.put(2l, new Person("112312", "notService"));
+        return map;
+    }
+
     public String findByName(String name) {
-        List<Person> list1 = new ArrayList<>();
-        list1.add(new Person(1, "service"));
-        list1.add(new Person(1432, "w2"));
-        for (Person person : list1) {
-            if (name.equals(person.getName())) {
-                persons=person;
+        for (Map.Entry<Long, Person> entry : bd().entrySet()) {
+            Person value = entry.getValue();
+            if (name.equals(value.getName())) {
+                persons = value;
             }
         }
         return persons.getName();
+    }
+    public String save(Long id,Person persons) {
+        bd().put(id,persons);
+        return String.valueOf(persons);
+    }
+    public String findAll() {
+        return String.valueOf(bd());
     }
 }
