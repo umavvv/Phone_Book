@@ -6,7 +6,9 @@ import org.example.service.impl.PersonServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        PersonController personController = new PersonController(new PersonServiceImpl(new PersonRepositoryImpl()));
+        PersonController personController = new PersonController(
+                new PersonServiceImpl(
+                        new PersonRepositoryImpl()));
         personController.show();
     }
 }
