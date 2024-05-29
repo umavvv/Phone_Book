@@ -17,23 +17,23 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void getByName(String name) {
-        System.out.println(Optional.ofNullable(personRepository.findByName(name)).orElseThrow());
+    public Person getByName(String name) {
+        return findByName(name).orElseThrow();
     }
 
     @Override
-    public void getServiceContact(String name) {
-        System.out.println(Optional.ofNullable(personRepository.findByName(name)).orElseGet(() ->new Person("12356789",null)));    }
+    public Person getServiceContact(String name) {
+        return findByName(name).orElseGet(() -> new Person(null, "1234"));
+    }
 
     @Override
     public void logServiceContact(String name) {
-        Optional<Person> optional = Optional.ofNullable(personRepository.findByName(name));
-        optional.ifPresentOrElse(person -> log.info(name)
+        findByName(name).ifPresentOrElse(person -> log.info(name)
                 , () -> log.info("No service contact"));
     }
 
-    public Person save(String name,Person person) {
-        return personRepository.save(name,new Person(person.getNumber(),person.getName()));
+    public Person save(String name, Person person) {
+        return personRepository.save(name, person);
     }
 
     public String findAll() {
