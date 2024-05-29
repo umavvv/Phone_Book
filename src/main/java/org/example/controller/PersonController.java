@@ -24,15 +24,14 @@ public class PersonController {
             option = scanner.next().charAt(0);
             switch (option) {
                 case 'A':
-                    System.out.println("Введи id");
-                    String namekey = scanner.next();
                     System.out.println("Введи имя");
                     String name = scanner.next();
                     System.out.println("Введи номер телефона");
                     String number = scanner.next();
-                    Person person = new Person(number, name);
-
-                    System.out.println(personService.save(namekey,person));
+                    System.out.println("Введи email");
+                    String gmail = scanner.next();
+                    Person person = new Person(number, gmail);
+                    System.out.println(personService.save(name,person));
                     break;
                 case 'B':
                     System.out.println(personService.findAll());

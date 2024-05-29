@@ -6,9 +6,9 @@ import java.util.Optional;
 
 public interface PersonService {
     Optional<Person> findByName(String name);
-    void getByName(String name);
-    void getServiceContact(String name);
+    Person getByName(String name);
+    Person getServiceContact(String name);
     void logServiceContact(String name);
-    Person save(String name,Person person);
+    Person save(String name, Person person);
     String findAll();
 }
