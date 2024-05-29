@@ -2,7 +2,7 @@ package org.example.service.impl;
 
 import lombok.extern.java.Log;
 import org.example.entity.Person;
-import org.example.repository.impl.PersonRepository;
+import org.example.repository.PersonRepository;
 import org.example.service.PersonService;
 
 import java.util.Optional;
@@ -12,7 +12,7 @@ public class PersonServiceImpl implements PersonService {
     PersonRepository personRepository = new PersonRepository();
 
     @Override
-    public Optional<String> findByName(String name) {
+    public Optional<Person> findByName(String name) {
         return Optional.ofNullable(personRepository.findByName(name));
     }
 
@@ -23,23 +23,20 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void getServiceContact(String name) {
-        Optional optional = Optional.ofNullable(personRepository.findByName(name));
-        System.out.println(Optional.ofNullable(optional.orElseGet(() -> "123456789")).get());
-    }
+        System.out.println(Optional.ofNullable(personRepository.findByName(name)).orElseGet(() ->new Person("12356789",null)));    }
 
     @Override
     public void logServiceContact(String name) {
-        Optional<String> optional = Optional.ofNullable(personRepository.findByName(name));
+        Optional<Person> optional = Optional.ofNullable(personRepository.findByName(name));
         optional.ifPresentOrElse(person -> log.info(name)
                 , () -> log.info("No service contact"));
     }
 
-    public Person save(Long id, Person persons) {
-        personRepository.put(id, new Person(persons.getNumber(), persons.getName()));
-        return persons;
+    public Person save(String name,Person person) {
+        return personRepository.save(name,new Person(person.getNumber(),person.getName()));
     }
 
     public String findAll() {
-        return String.valueOf(personRepository);
+        return personRepository.findAll();
     }
 }

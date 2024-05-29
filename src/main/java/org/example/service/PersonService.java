@@ -5,10 +5,10 @@ import org.example.entity.Person;
 import java.util.Optional;
 
 public interface PersonService {
-    Optional<String> findByName(String name);
+    Optional<Person> findByName(String name);
     void getByName(String name);
     void getServiceContact(String name);
     void logServiceContact(String name);
-    Person save(Long id,Person persons);
+    Person save(String name,Person person);
     String findAll();
 }

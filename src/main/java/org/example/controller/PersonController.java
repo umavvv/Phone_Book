@@ -25,13 +25,14 @@ public class PersonController {
             switch (option) {
                 case 'A':
                     System.out.println("Введи id");
-                    Long id = scanner.nextLong();
+                    String namekey = scanner.next();
                     System.out.println("Введи имя");
                     String name = scanner.next();
                     System.out.println("Введи номер телефона");
                     String number = scanner.next();
                     Person person = new Person(number, name);
-                    System.out.println(personService.save(id, person));
+
+                    System.out.println(personService.save(namekey,person));
                     break;
                 case 'B':
                     System.out.println(personService.findAll());
