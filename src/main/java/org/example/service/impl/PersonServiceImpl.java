@@ -5,11 +5,16 @@ import org.example.entity.Person;
 import org.example.repository.PersonRepository;
 import org.example.service.PersonService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Log
 public class PersonServiceImpl implements PersonService {
-    PersonRepository personRepository = new PersonRepository();
+    private final PersonRepository personRepository;
+
+    public PersonServiceImpl(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
 
     @Override
     public Optional<Person> findByName(String name) {
@@ -36,7 +41,7 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.save(name, person);
     }
 
-    public String findAll() {
+    public List<Person> findAll() {
         return personRepository.findAll();
     }
 }

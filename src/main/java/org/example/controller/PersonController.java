@@ -2,16 +2,53 @@ package org.example.controller;
 
 import org.example.entity.Person;
 import org.example.service.PersonService;
-import org.example.service.impl.PersonServiceImpl;
 
 import java.util.Scanner;
 
 public class PersonController {
+    private final Scanner scanner = new Scanner(System.in);
+    private final PersonService personService;
+
+    public PersonController(PersonService personService) {
+        this.personService = personService;
+    }
+
+    public void save() {
+        System.out.println("Введи имя");
+        String name = scanner.next();
+        System.out.println("Введи номер телефона");
+        String number = scanner.next();
+        System.out.println("Введи email");
+        String gmail = scanner.next();
+        Person person = new Person(number, gmail);
+        System.out.println(personService.save(name, person));
+    }
+
+    public void findAll() {
+        System.out.println(personService.findAll());
+    }
+
+    public void findByName() {
+        System.out.println(personService.findByName(scanner.next()));
+    }
+
+    public void getServiceContact() {
+        String name = scanner.next();
+        personService.getServiceContact(name);
+    }
+
+    public void logServiceContact() {
+        String name = scanner.next();
+        personService.logServiceContact(name);
+    }
+
+    public void getByName() {
+        String name = scanner.next();
+        personService.getByName(name);
+    }
+
     public void show() {
         char option;
-        Scanner scanner = new Scanner(System.in);
-        PersonService personService = new PersonServiceImpl();
-
         System.out.println("A. Сохранить пользователя");
         System.out.println("B. Вывести всех пользователей");
         System.out.println("C. Найти по имени");
@@ -24,32 +61,22 @@ public class PersonController {
             option = scanner.next().charAt(0);
             switch (option) {
                 case 'A':
-                    System.out.println("Введи имя");
-                    String name = scanner.next();
-                    System.out.println("Введи номер телефона");
-                    String number = scanner.next();
-                    System.out.println("Введи email");
-                    String gmail = scanner.next();
-                    Person person = new Person(number, gmail);
-                    System.out.println(personService.save(name,person));
+                    save();
                     break;
                 case 'B':
-                    System.out.println(personService.findAll());
+                    findAll();
                     break;
                 case 'C':
-                    System.out.println(personService.findByName(scanner.next()));
+                    findByName();
                     break;
                 case 'D':
-                    String name2 = scanner.next();
-                    personService.getServiceContact(name2);
+                    getServiceContact();
                     break;
                 case 'F':
-                    String name3 = scanner.next();
-                    personService.logServiceContact(name3);
+                    logServiceContact();
                     break;
                 case 'J':
-                    String name4 = scanner.next();
-                    personService.getByName(name4);
+                    getByName();
                     break;
                 case 'E':
                     System.out.println("Выход");
